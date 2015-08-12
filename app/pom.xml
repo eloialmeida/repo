@@ -11,6 +11,19 @@
 
   <url>http://maven.apache.org</url>
   
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.spring.platform</groupId>
+				<artifactId>platform-bom</artifactId>
+				<version>1.1.2.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -50,9 +63,36 @@
 	</dependency>
 	<!-- END OF CFX DEPENDENCY CHAIN -->
 	
-	
+	<!-- Database (H2) Testing -->
+	<dependency>
+		<groupId>com.h2database</groupId>
+		<artifactId>h2</artifactId>
+	</dependency>
+	<!-- Database MySQL -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.6</version>
+	</dependency>
+			 
+	<!-- DataSource (HikariCP) -->
+	<dependency>
+		<groupId>com.zaxxer</groupId>
+		<artifactId>HikariCP</artifactId>
+	</dependency>
+	 
+	<!-- JPA Provider (Hibernate) -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+	</dependency>
+	 
+	<!-- Spring Data JPA -->
+	<dependency>
+		<groupId>org.springframework.data</groupId>
+		<artifactId>spring-data-jpa</artifactId>
+	</dependency>
 
-	
   </dependencies>
   
    

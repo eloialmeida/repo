@@ -1,6 +1,6 @@
 package com.multicert.usermgmt.client;
 
-import java.util.Date;  
+  
 import java.util.List;
 
 import com.multicert.usermgmt.model.Cliente;
