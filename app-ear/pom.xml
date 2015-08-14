@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<name>EAR Application</name>
+	<artifactId>app-ear</artifactId>
+	<packaging>ear</packaging>
+	<groupId>com.thales.apis</groupId>
+	<version>8.1.0-SNAPSHOT</version>
+	
+
+	<dependencies>	
+		<dependency>
+			<groupId>com.thales.apis</groupId>
+			<artifactId>mb-network-adapters</artifactId>
+			<version>8.1.0-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.thales.apis</groupId>
+			<artifactId>app-core</artifactId>
+			<version>8.1.0-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.thales.apis</groupId>
+			<artifactId>app-core-client</artifactId>
+			<version>8.1.0-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.thales.apis</groupId>
+			<artifactId>app-core-ejb</artifactId>
+			<version>8.1.0-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.thales.apis</groupId>
+			<artifactId>mb-inbound-adapters-soap</artifactId>
+			<version>8.1.0-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+		
+			
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<initializeInOrder>false</initializeInOrder>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<displayName>app-ear</displayName>
+					<finalName>app-ear</finalName>
+					<skinnyWars>false</skinnyWars>
+					<modules>
+						<webModule>
+							<groupId>com.thales.apis</groupId>
+							<artifactId>mb-inbound-adapters-soap</artifactId>
+							<contextRoot>/mb-inbound-adapters-soap</contextRoot>
+						</webModule>
+						
+						<ejbModule>
+                            <groupId>com.thales.apis</groupId>
+                            <artifactId>app-core-ejb</artifactId>
+                            <bundleFileName>app-core-ejb-8.1.0-SNAPSHOT</bundleFileName>
+                        </ejbModule>
+						
+					</modules>
+					<archive>
+						<manifestEntries>
+							<Dependencies>org.jboss.remote-naming</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

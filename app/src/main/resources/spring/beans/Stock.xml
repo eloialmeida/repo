@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- business object -->
+   <bean id="UserManagementClient" class="package com.multicert.usermgmt.bean.UserManagementBean" >
+   		<property name="UserManagementDao" ref="UserManagementDao" />
+   </bean>
+ 
+   <!-- Data Access Object -->
+   <bean id="UserManagementDao" class="com.multicert.usermgmt.dao.UserManagementDaoImpl" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+   
+   		
+</beans>

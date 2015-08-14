@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<name>MB : Network Adapters</name>
+	<artifactId>mb-network-adapters</artifactId>
+	<packaging>pom</packaging>
+	<groupId>com.thales.apis</groupId>
+	<version>8.1.0-SNAPSHOT</version>
+
+	<parent>
+		<groupId>com.thales.apis</groupId>
+		<artifactId>APP</artifactId>
+		<version>8.1.0-SNAPSHOT</version>
+	</parent>
+	
+	<modules>
+		<module>mb-assets</module>
+		<module>mb-inbound-adapters</module>
+	</modules>
+</project>

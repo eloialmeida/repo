@@ -62,36 +62,50 @@
 		<scope>test</scope>  
 	</dependency>
 	<!-- END OF CFX DEPENDENCY CHAIN -->
-	
-	<!-- Database (H2) Testing -->
-	<dependency>
-		<groupId>com.h2database</groupId>
-		<artifactId>h2</artifactId>
-	</dependency>
-	<!-- Database MySQL -->
+
+     <!-- MySQL database driver -->
 	<dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
-		<version>5.1.6</version>
+		<version>5.1.9</version>
 	</dependency>
-			 
-	<!-- DataSource (HikariCP) -->
+	
 	<dependency>
-		<groupId>com.zaxxer</groupId>
-		<artifactId>HikariCP</artifactId>
+		<groupId>javax.transaction</groupId>
+		<artifactId>jta</artifactId>
+		<version>1.1</version>
 	</dependency>
-	 
-	<!-- JPA Provider (Hibernate) -->
+
+	
+	<!-- Hibernate framework -->
 	<dependency>
 		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-entitymanager</artifactId>
+		<artifactId>hibernate</artifactId>
+		<version>3.2.3.ga</version>
 	</dependency>
-	 
-	<!-- Spring Data JPA -->
+
+	
+	<!-- Hibernate library dependecy start -->
 	<dependency>
-		<groupId>org.springframework.data</groupId>
-		<artifactId>spring-data-jpa</artifactId>
+		<groupId>dom4j</groupId>
+		<artifactId>dom4j</artifactId>
 	</dependency>
+	
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+	</dependency>
+	
+	<dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+	</dependency>
+	
+	<dependency>
+		<groupId>antlr</groupId>
+		<artifactId>antlr</artifactId>
+	</dependency>
+	<!-- Hibernate library dependecy end -->
 
   </dependencies>
   

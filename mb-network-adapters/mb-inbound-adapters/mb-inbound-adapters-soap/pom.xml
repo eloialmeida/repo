@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<name>MB : Inbound Adapters - SOAP </name>
+	<artifactId>mb-inbound-adapters-soap</artifactId>
+	<packaging>war</packaging>
+
+	<parent>
+		<groupId>com.thales.apis</groupId>
+		<artifactId>mb-inbound-adapters</artifactId>
+		<version>8.1.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!--<dependency>
+			<groupId>com.thales.apis</groupId>
+			<artifactId>topology-client</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>-->
+		<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>3.1.0</version>
+</dependency>
+		<dependency>
+			<groupId>com.thales.apis</groupId>
+			<artifactId>mb-assets-inbound</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thales.apis</groupId>
+			<artifactId>app-core-client</artifactId>
+			<version>8.1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<configuration>
+					<filename>mb-inbound-adapters-soap.war</filename>
+
+					<!-- execute-commands> <commands> <command>/subsystem=logging/file-handler=debug:add(level=DEBUG,autoflush=true,file={"relative-to"=>"jboss.server.log.dir", 
+						"path"=>"debug_apis.log"})</command> <command>/subsystem=logging/logger=org.jboss.as:add(level=DEBUG,handlers=[debug])</command> 
+						</commands> </execute-commands -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Dependencies>org.apache.log4j</Dependencies>
+							<Dependencies>org.slf4j</Dependencies>
+							<Dependencies>org.jboss.remote-naming</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

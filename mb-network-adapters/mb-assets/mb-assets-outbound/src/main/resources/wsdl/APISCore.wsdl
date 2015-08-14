@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.apis.thales.com/APISCore/" xmlns:mcb="http://www.apis.thales.com/MediaBroadcasterCommonTypes"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="APISCore" targetNamespace="http://www.apis.thales.com/APISCore/">
+	<wsdl:types>
+		<!-- This is a copy from the common assets XSD -->
+		<xsd:schema elementFormDefault="qualified"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.apis.thales.com/MediaBroadcasterCommonTypes">
+
+			<xsd:simpleType name="MessageStatus">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="WAITING_PRESENTATION" />
+					<xsd:enumeration value="ON_DEVICE" />
+					<xsd:enumeration value="CANCELLED" />
+					<xsd:enumeration value="BROADCASTED" />
+					<xsd:enumeration value="INTERRUPTED" />
+					<xsd:enumeration value="PARTIALLY_DELIVERED" />
+					<xsd:enumeration value="EXPIRED" />
+					<xsd:enumeration value="ACCEPTED_ON_DEVICE" />
+					<xsd:enumeration value="NOT_BROADCASTED" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="MessageId">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" maxOccurs="1" name="id" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ErrorType">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" maxOccurs="1" name="errorCode" type="xsd:string" />
+					<xsd:element minOccurs="0" maxOccurs="1" name="errorMessage" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+
+
+		<!-- END This is a copy from the common assets XSD END -->
+
+		<xsd:schema targetNamespace="http://www.apis.thales.com/APISCore/">
+			<!-- xsd:import namespace="http://www.apis.thales.com/MediaBroadcasterCommonTypes"
+				schemaLocation="../../../../../mb-assets-common/src/main/resources/xsd/MediaBroadcasterCommonTypes.xsd" /-->
+			<xsd:element name="receivedMessage">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="instant" type="xsd:dateTime" />
+						<xsd:element name="messageID" type="mcb:MessageId" />
+						<xsd:element name="state" type="mcb:MessageStatus" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="receivedMessageResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="outcome" type="xsd:boolean" />
+						<xsd:element name="error" type="mcb:ErrorType" maxOccurs="1" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateMessageState">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="instant" type="xsd:dateTime" />
+						<xsd:element name="status" type="mcb:MessageStatus" />
+						<xsd:element name="reason" type="tns:Reason" />
+						<xsd:element name="messageID" type="mcb:MessageId" />
+						<xsd:element name="deviceList" type="tns:Device" maxOccurs="unbounded" minOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="updateMessageStateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="outcome" type="xsd:boolean" />
+						<xsd:element name="error" type="mcb:ErrorType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="reportOccurrence">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Occurrence" type="tns:Occurrence" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="reportOccurrenceResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="outcome" type="xsd:boolean" />
+						<xsd:element name="error" type="mcb:ErrorType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:complexType name="Occurrence">
+				<xsd:sequence>
+				    <xsd:element name="instant" type="xsd:dateTime" />
+				    <xsd:element name="occurrencelocation" type="xsd:string" />
+					<xsd:element name="objectComponentType" type="tns:ObjectComponentType" />
+                    <xsd:element name="objectId" type="xsd:string" />
+					<xsd:element name="objectState" type="tns:ObjectState" />
+                    <xsd:element name="objectType" type="tns:ObjectType" /> 
+                    <xsd:element name="occurrenceType" type="tns:OccurrenceType" />
+                    <xsd:element name="componentId" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="OccurrenceType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="CONNECTION" />
+                    <xsd:enumeration value="DOOR" />
+                    <xsd:enumeration value="VANDALISM" />
+				</xsd:restriction>
+			</xsd:simpleType>
+            <xsd:simpleType name="ObjectType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="LDAP" />
+                    <xsd:enumeration value="DATAWAREHOUSE" />
+                    <xsd:enumeration value="DISPLAY" />
+                    <xsd:enumeration value="PAS" />
+                    <xsd:enumeration value="MICROPHONE" />
+                    <xsd:enumeration value="KIOSK" />
+                    <xsd:enumeration value="TMS_GATEWAY" />
+                    <xsd:enumeration value="MEDIA_BROADCASTER" />
+                    <xsd:enumeration value="CONTROLLER" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="ObjectState">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="OK" />
+                    <xsd:enumeration value="NOT_OK" />
+                    <xsd:enumeration value="STANDBY" />
+                    <xsd:enumeration value="UNKNOWN" />
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="ObjectComponentType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="COOLER" />
+                    <xsd:enumeration value="LED_MATRIX" />
+                    <xsd:enumeration value="SPEAKER" />
+                </xsd:restriction>
+            </xsd:simpleType>
+			<xsd:simpleType name="Reason">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="MESSAGE_INTERRUPTED" />
+					<xsd:enumeration value="MESSAGE_RESUMED" />
+					<xsd:enumeration value="MESSAGE_ON_DEVICE" />
+					<xsd:enumeration value="MESSAGE_CANCELLED" />
+					<xsd:enumeration value="MESSAGE_EXPIRED" />
+					<xsd:enumeration value="MESSAGE_BROADCASTED" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="Device">
+				<xsd:sequence>
+					<xsd:element name="deviceID" type="xsd:string" />
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="ip" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getExistentMedia">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="fileName" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getExistentMediaResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="outputFile" type="xsd:base64Binary" />
+						<xsd:element name="error" type="mcb:ErrorType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateZoneStatus">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="audioZoneStatus" type="tns:AudioZoneStatus"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="updateZoneStatusResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="outcome" type="xsd:boolean" />
+						<xsd:element name="error" type="mcb:ErrorType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="AudioZoneStatus">
+				<xsd:sequence>
+					<xsd:element name="audioZoneId" type="xsd:string" />
+					<xsd:element name="priorityLevel" type="xsd:int" />
+					<xsd:element name="microphoneId" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="busy" type="xsd:boolean" />
+					<xsd:element name="messageId" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="controllerId" type="xsd:string"/>
+					<xsd:element name="protocol" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="speakNow">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="microphoneId" type="xsd:string" />
+						<xsd:element name="workstationName" type="xsd:string" />
+						<xsd:element name="messageId" type="xsd:string" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="speakNowResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="outcome" type="xsd:boolean" />
+						<xsd:element name="error" type="mcb:ErrorType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="liveAnnouncementStopped">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="microphoneId" type="xsd:string" />
+						<xsd:element name="messageId" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="liveAnnouncementStoppedResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="outcome" type="xsd:boolean" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="audioMessageFail">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="microphoneId" type="xsd:string"></xsd:element>
+						<xsd:element name="messageID" type="xsd:string"></xsd:element>
+						<xsd:element name="workstationName" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="audioMessageFailResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="outcome" type="xsd:boolean" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="receivedMessageRequest">
+		<wsdl:part element="tns:receivedMessage" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="receivedMessageResponse">
+		<wsdl:part element="tns:receivedMessageResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="updateMessageStateRequest">
+		<wsdl:part name="parameters" element="tns:updateMessageState" />
+	</wsdl:message>
+	<wsdl:message name="updateMessageStateResponse">
+		<wsdl:part name="parameters" element="tns:updateMessageStateResponse" />
+	</wsdl:message>
+	<wsdl:message name="NewMessage">	</wsdl:message>
+	<wsdl:message name="reportOccurrenceRequest">
+		<wsdl:part name="parameters" element="tns:reportOccurrence" />
+	</wsdl:message>
+	<wsdl:message name="reportOccurrenceResponse">
+		<wsdl:part name="parameters" element="tns:reportOccurrenceResponse" />
+	</wsdl:message>
+	<wsdl:message name="getExistentMediaRequest">
+		<wsdl:part name="parameters" element="tns:getExistentMedia" />
+	</wsdl:message>
+	<wsdl:message name="getExistentMediaResponse">
+		<wsdl:part name="parameters" element="tns:getExistentMediaResponse" />
+	</wsdl:message>
+	<wsdl:message name="updateZoneStatusRequest">
+		<wsdl:part name="parameters" element="tns:updateZoneStatus"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateZoneStatusResponse">
+		<wsdl:part name="parameters" element="tns:updateZoneStatusResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="speakNowRequest">
+		<wsdl:part name="parameters" element="tns:speakNow"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="speakNowResponse">
+		<wsdl:part name="parameters" element="tns:speakNowResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="liveAnnouncementStoppedRequest">
+		<wsdl:part name="parameters" element="tns:liveAnnouncementStopped"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="liveAnnouncementStoppedResponse">
+		<wsdl:part name="parameters" element="tns:liveAnnouncementStoppedResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="audioMessageFailRequest">
+		<wsdl:part name="parameters" element="tns:audioMessageFail"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="audioMessageFailResponse">
+		<wsdl:part name="parameters" element="tns:audioMessageFailResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="APISCore">
+		<wsdl:operation name="receivedMessage">
+			<wsdl:input message="tns:receivedMessageRequest" />
+			<wsdl:output message="tns:receivedMessageResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateMessageState">
+			<wsdl:input message="tns:updateMessageStateRequest" />
+			<wsdl:output message="tns:updateMessageStateResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="reportOccurrence">
+			<wsdl:input message="tns:reportOccurrenceRequest" />
+			<wsdl:output message="tns:reportOccurrenceResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getExistentMedia">
+			<wsdl:input message="tns:getExistentMediaRequest" />
+			<wsdl:output message="tns:getExistentMediaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateZoneStatus">
+			<wsdl:input message="tns:updateZoneStatusRequest"></wsdl:input>
+			<wsdl:output message="tns:updateZoneStatusResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="speakNow">
+			<wsdl:input message="tns:speakNowRequest"></wsdl:input>
+			<wsdl:output message="tns:speakNowResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="liveAnnouncementStopped">
+			<wsdl:input message="tns:liveAnnouncementStoppedRequest"></wsdl:input>
+			<wsdl:output message="tns:liveAnnouncementStoppedResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="audioMessageFail">
+			<wsdl:input message="tns:audioMessageFailRequest"></wsdl:input>
+			<wsdl:output message="tns:audioMessageFailResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="APISCoreSOAP" type="tns:APISCore">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="receivedMessage">
+			<soap:operation
+				soapAction="http://www.apis.thales.com/APISCore/receivedMessage" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateMessageState">
+			<soap:operation
+				soapAction="http://www.apis.thales.com/APISCore/updateMessageState" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="reportOccurrence">
+			<soap:operation
+				soapAction="http://www.apis.thales.com/APISCore/reportOccurrence" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getExistentMedia">
+			<soap:operation
+				soapAction="http://www.apis.thales.com/APISCore/getExistentMedia" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateZoneStatus">
+			<soap:operation
+				soapAction="http://www.apis.thales.com/APISCore/updateZoneStatus" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="speakNow">
+			<soap:operation
+				soapAction="http://www.apis.thales.com/APISCore/speakNow" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="liveAnnouncementStopped">
+			<soap:operation
+				soapAction="http://www.apis.thales.com/APISCore/liveAnnouncementStopped" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="audioMessageFail">
+			<soap:operation
+				soapAction="http://www.apis.thales.com/APISCore/audioMessageFail" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="APISCore">
+		<wsdl:port binding="tns:APISCoreSOAP" name="APISCoreSOAP">
+			<soap:address location="http://www.example.org/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

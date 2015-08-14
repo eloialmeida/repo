@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<xsd:schema elementFormDefault="qualified"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.apis.thales.com/MediaBroadcasterCommonTypes">
+	<xsd:simpleType name="MessageStatus">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="WAITING_PRESENTATION" />
+			<xsd:enumeration value="ON_DEVICE" />
+			<xsd:enumeration value="CANCELLED" />
+			<xsd:enumeration value="BROADCASTED" />
+			<xsd:enumeration value="INTERRUPTED" />
+			<xsd:enumeration value="PARTIALLY_DELIVERED" />
+			<xsd:enumeration value="EXPIRED" />
+			<xsd:enumeration value="ACCEPTED_ON_DEVICE" />
+			<xsd:enumeration value="NOT_BROADCASTED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="MessageId">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="id"
+				type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ErrorType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="errorCode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="errorMessage"
+				type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
