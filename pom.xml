@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<name>APP</name>
+	<artifactId>APP</artifactId>
+	<packaging>pom</packaging>
+	<groupId>com.multicert</groupId>
+	<version>1.0.0</version>
+	
+	
+	<dependencies>
+	
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>javax.ejb-api</artifactId>
+			<version>3.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		
+	</dependencies>
+	
+	<properties>
+
+		<!-- java/jee version -->
+		<version.ejb>3.2</version.ejb>
+		<version.ear>7</version.ear>
+
+	</properties>
+
+	<build>
+		<plugins>
+		<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-ejb-plugin</artifactId>
+		<configuration>
+			<ejbVersion>3.2</ejbVersion>
+		</configuration>
+		</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>app-model</module>
+		<module>app-core</module>
+		<module>app-network-adapters</module>
+		<module>app-ear</module>
+	</modules>
+</project>
