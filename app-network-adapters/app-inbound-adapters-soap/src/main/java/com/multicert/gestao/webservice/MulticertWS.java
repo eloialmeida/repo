@@ -32,8 +32,10 @@ public class MulticertWS implements Multicert {
 			com.multicert.model.Cliente b = service.guardarCliente(nome, morada, nif, telefone);
 			LOG.info("[OUT] guardarCliente");
 			return MulticertWSMapper.map2SoapObject(b);
-		} catch (MulticertException e) {
-			throw new RuntimeException(e.getCause());
+		} catch (MulticertException e) {		
+			LOG.error(e.getMessage());
+			//throw new RuntimeException(e.getCause());
+			return new Cliente();
 		}
 
 	}
@@ -48,7 +50,9 @@ public class MulticertWS implements Multicert {
 				listarClientesResponse.getCliente().add(MulticertWSMapper.map2SoapObject(c));
 			}
 		} catch (MulticertException e) {
-			throw new RuntimeException(e.getCause());
+			LOG.error(e.getMessage());
+			//throw new RuntimeException(e.getCause());
+			return new ListarClientesResponse().getCliente();
 		}
 
 		LOG.info("[OUT] listarClientes");
@@ -64,7 +68,9 @@ public class MulticertWS implements Multicert {
 			LOG.info("[OUT] listarClientesComNif");
 			return MulticertWSMapper.map2SoapObject(c);
 		} catch (MulticertException e) {
-			throw new RuntimeException(e.getCause());
+			LOG.error(e.getMessage());
+			//throw new RuntimeException(e.getCause());
+			return new Cliente();
 		}
 	}
 
@@ -78,7 +84,9 @@ public class MulticertWS implements Multicert {
 				listarClientesResponse.getCliente().add(MulticertWSMapper.map2SoapObject(c));
 			}
 		} catch (MulticertException e) {
-			throw new RuntimeException(e.getCause());
+			LOG.error(e.getMessage());
+			//throw new RuntimeException(e.getCause());
+			return new ListarClientesResponse().getCliente();
 		}
 
 		LOG.info("[OUT] listarClientesComNome");
@@ -92,7 +100,9 @@ public class MulticertWS implements Multicert {
 		try {
 			service.apagarClientePorNif(nif);
 		} catch (MulticertException e) {
-			throw new RuntimeException(e.getCause());
+			LOG.error(e.getMessage());
+			//throw new RuntimeException(e.getCause());
+			return new VOID();
 		}
 		LOG.info("[OUT] apagarClientesPorNif");
 		return _void_;
