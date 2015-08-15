@@ -17,4 +17,6 @@ public interface GestaoLocal {
 	Cliente listarCliente(String nif) throws MulticertException;
 	
 	public List<Cliente> listarClientesComNome(String ptrn) throws MulticertException;
+	
+	public void apagarClientePorNif(String nif) throws MulticertException;
 }

@@ -5,13 +5,17 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 
 
 
+
+
 import com.multicert.model.Cliente;
+import com.multicert.model.MulticertException;
 
 @SuppressWarnings("unchecked")
 @Default
@@ -26,10 +30,11 @@ public class MulticertDaoImpl<T extends Cliente> implements MulticertDao<T> {
 		
 	private static final String CLIENT_GET_BY_NAME_CONTAINS = "SELECT c FROM Cliente c WHERE c.nome LIKE :"+KEY_1;
 
+	//private static final String CLIENT_DELETE_BY_NIF = "DELETE FROM Cliente c WHERE c.nif = :"+KEY_1;
 
 	/**
 	 * PersistenceContextType.TRANSACTION -> 1 ciclo de vida por transaçao
-	 * (necessario para ser consumido por beans stateless)
+	 * (necessario para ser injectado em beans stateless)
 	 */
 	@PersistenceContext(unitName = "punit", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;
@@ -38,26 +43,34 @@ public class MulticertDaoImpl<T extends Cliente> implements MulticertDao<T> {
 		entityManager.persist(object);
 	}
 
-	public T read(String id) {
-	    TypedQuery<T> query = (TypedQuery<T>) entityManager.createQuery(CLIENT_GET_BY_NIF);
-		    return query.setParameter(KEY_1, id).getSingleResult();
+	public T read(String id) throws MulticertException {
+		try{
+		    TypedQuery<T> query = (TypedQuery<T>) entityManager.createQuery(CLIENT_GET_BY_NIF);
+			    return query.setParameter(KEY_1, id).getSingleResult();
+		} catch(NoResultException e){
+			throw new MulticertException(e.getMessage());
+		}
 	}
 
 	public void update(T object) {
 		entityManager.merge(object);
 	}
 
-	public void delete(T object) {
-		entityManager.remove(object);
+	public void delete(T object) throws MulticertException {
+		try{
+			entityManager.remove(object);
+		} catch(NoResultException e){
+			throw new MulticertException(e.getMessage());
+		}
 	}
 
-	public List<T> getAll() {
+	public List<T> getAll() throws MulticertException {
 	    TypedQuery<T> query = (TypedQuery<T>) entityManager.createQuery(CLIENTS_GET_ALL);
 	    return query.getResultList();
 	}
 
-	public List<T> getAllWithNameContains(String pattern) {
-		TypedQuery<T> query = (TypedQuery<T>) entityManager.createQuery(CLIENT_GET_BY_NAME_CONTAINS);
-	    return query.setParameter(KEY_1, "%"+pattern+"%").getResultList();
+	public List<T> getAllWithNameLike(String pattern) {
+		TypedQuery<T> query = (TypedQuery<T>) entityManager.createQuery(CLIENT_GET_BY_NAME_CONTAINS);	
+	    return query.setParameter(KEY_1, new StringBuilder().append("%").append(pattern).append("%").toString()).getResultList();
 	}
 }

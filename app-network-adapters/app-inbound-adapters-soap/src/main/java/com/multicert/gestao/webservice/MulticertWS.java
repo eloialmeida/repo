@@ -11,11 +11,11 @@ import org.slf4j.LoggerFactory;
 
 import com.multicert.gestao.GestaoLocal;
 import com.multicert.model.MulticertException;
-import com.multicert.multicert.ListarClientes;
 import com.multicert.multicert.ListarClientesComNomeResponse;
 import com.multicert.multicert.ListarClientesResponse;
 import com.multicert.multicert.Multicert;
 import com.multicert.multicertcommontypes.Cliente;
+import com.multicert.multicertcommontypes.VOID;
 
 
 @WebService(targetNamespace = "http://www.multicert.com/Multicert/", name = "Multicert")
@@ -39,7 +39,7 @@ public class MulticertWS implements Multicert {
 	}
 
 
-	public ListarClientesResponse listarClientes(ListarClientes parameters) {
+	public List<Cliente> listarClientes(VOID parameters) {
 
 		ListarClientesResponse listarClientesResponse = new ListarClientesResponse();
 
@@ -52,7 +52,7 @@ public class MulticertWS implements Multicert {
 		}
 
 		LOG.info("[OUT] listarClientes");
-		return listarClientesResponse;
+		return listarClientesResponse.getCliente();
 	}
 
 
@@ -81,7 +81,20 @@ public class MulticertWS implements Multicert {
 			throw new RuntimeException(e.getCause());
 		}
 
-		LOG.info("[OUT] listarClientes");
+		LOG.info("[OUT] listarClientesComNome");
 		return listarClientesResponse.getCliente();
+	}
+
+
+	public VOID apagarClientesPorNif(String nif) {
+		VOID _void_ = new VOID();
+		LOG.info("[IN] apagarClientesPorNif {}",nif);
+		try {
+			service.apagarClientePorNif(nif);
+		} catch (MulticertException e) {
+			throw new RuntimeException(e.getCause());
+		}
+		LOG.info("[OUT] apagarClientesPorNif");
+		return _void_;
 	}
 }

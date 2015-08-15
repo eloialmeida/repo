@@ -35,13 +35,13 @@
 			<xsd:element name="guardarCliente">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element minOccurs="0" maxOccurs="1" name="nif"
+						<xsd:element minOccurs="1" maxOccurs="1" name="nif"
 							type="xsd:string" />
-						<xsd:element minOccurs="0" maxOccurs="1" name="nome"
+						<xsd:element minOccurs="1" maxOccurs="1" name="nome"
 							type="xsd:string" />
-						<xsd:element minOccurs="0" maxOccurs="1" name="morada"
+						<xsd:element minOccurs="1" maxOccurs="1" name="morada"
 							type="xsd:string" />
-						<xsd:element minOccurs="0" maxOccurs="1" name="telefone"
+						<xsd:element minOccurs="1" maxOccurs="1" name="telefone"
 							type="xsd:string" />
 					</xsd:sequence>
 				</xsd:complexType>
@@ -58,7 +58,7 @@
 			<xsd:element name="listarClientesComNome">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element minOccurs="0" maxOccurs="1" name="nome" type="xsd:string" />
+						<xsd:element minOccurs="1" maxOccurs="1" name="nome" type="xsd:string" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -75,7 +75,7 @@
 			<xsd:element name="listarClientes">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="Cliente" maxOccurs="0" type="mcb:VOID" />
+						<xsd:element name="void" maxOccurs="1" type="mcb:VOID" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -92,7 +92,7 @@
 			<xsd:element name="listarClientesComNif">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element minOccurs="1" maxOccurs="1" name="nome" type="xsd:string" />
+						<xsd:element minOccurs="1" maxOccurs="1" name="nif" type="xsd:string" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -100,6 +100,22 @@
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="Cliente" maxOccurs="1" type="mcb:Cliente" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Apagar CLIENTES COM NIF -->
+			<xsd:element name="apagarClientesPorNif">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="1" maxOccurs="1" name="nif" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="apagarClientesPorNifResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="void" maxOccurs="1" type="mcb:VOID" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -159,6 +175,19 @@
 		<wsdl:operation name="listarClientesComNif">
 			<wsdl:input message="tns:listarClientesComNifRequest" />
 			<wsdl:output message="tns:listarClientesComNifResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+		
+	<wsdl:message name="apagarClientesPorNifRequest">
+		<wsdl:part element="tns:apagarClientesPorNif" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="apagarClientesPorNifResponse">
+		<wsdl:part element="tns:apagarClientesPorNifResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:portType name="Multicert">
+		<wsdl:operation name="apagarClientesPorNif">
+			<wsdl:input message="tns:apagarClientesPorNifRequest" />
+			<wsdl:output message="tns:apagarClientesPorNifResponse" />
 		</wsdl:operation>
 	</wsdl:portType>
 	
