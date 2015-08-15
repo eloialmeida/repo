@@ -8,6 +8,12 @@ import com.multicert.model.Cliente;
 
 @Local
 public interface GestaoLocal {
+	
 	Cliente guardarCliente(String nome, String morada, String nif);
+	
 	List<Cliente> listarClientes();
+	
+	Cliente listarCliente(String nif);
+	
+	public List<Cliente> listarClientesComNome(String ptrn);
 }

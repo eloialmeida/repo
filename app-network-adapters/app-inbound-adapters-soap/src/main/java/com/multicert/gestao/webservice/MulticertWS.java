@@ -1,5 +1,7 @@
 package com.multicert.gestao.webservice;
 
+import java.util.Arrays;
+
 import javax.ejb.EJB;
 import javax.jws.WebService;
 
@@ -30,11 +32,20 @@ public class MulticertWS implements Multicert {
 
 
 	public ListarClientesResponse listarClientes(ListarClientes parameters) {
-		LOG.info("[IN] listarClientes");
+//		LOG.info("[IN] listarClientes");
 		ListarClientesResponse listarClientesResponse = new ListarClientesResponse();
-		for(com.multicert.model.Cliente c : service.listarClientes()){
+//		for(com.multicert.model.Cliente c : service.listarClientes()){
+//			listarClientesResponse.getCliente().add(MulticertWSMapper.map2SoapObject(c));
+//		}
+//		LOG.info("[OUT] listarClientes");
+//		return listarClientesResponse;
+		
+		
+		for(com.multicert.model.Cliente c : service.listarClientesComNome("loi")){
 			listarClientesResponse.getCliente().add(MulticertWSMapper.map2SoapObject(c));
 		}
+		
+
 		LOG.info("[OUT] listarClientes");
 		return listarClientesResponse;
 	}
