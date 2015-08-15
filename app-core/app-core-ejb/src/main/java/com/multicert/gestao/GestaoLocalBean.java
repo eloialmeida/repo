@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.sql.DataSourceDefinition;
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -19,6 +20,10 @@ import javax.persistence.PersistenceContextType;
 
 
 
+
+
+
+import com.multicert.gestao.dao.MulticertDao;
 import com.multicert.model.Cliente;
 
 
@@ -26,26 +31,15 @@ import com.multicert.model.Cliente;
 @Default
 @Stateless
 public class GestaoLocalBean implements GestaoLocal {
-	
-	/**
-	 * PersistenceContextType.TRANSACTION -> 1 ciclo de vida por transaçao (GestaoLocalBean é stateless)
-	 */
-    @PersistenceContext(unitName = "punit", type = PersistenceContextType.TRANSACTION)
-    private EntityManager entityManager;
 
+	@EJB
+	private MulticertDao<Cliente> dao;
 
-	
 	public Cliente guardarCliente(String nome, String morada, String nif) {
-		
-//		Session session = HibernateSessionManager.getSessionFactory().openSession();
-		Cliente cliente = new Cliente(nome,morada,UUID.randomUUID().toString());
-//		session.beginTransaction();
-//		session.save(cliente);
-//		session.getTransaction().commit();
-		
 
-		entityManager.persist(cliente);
-			
+		Cliente cliente = new Cliente(nome,morada,UUID.randomUUID().toString());
+
+		dao.create(cliente);
 		
 		return cliente;
 	}
@@ -57,4 +51,6 @@ public class GestaoLocalBean implements GestaoLocal {
 				new Cliente("in progress","in progress","in progress"),
 				new Cliente("in progress","in progress","in progress"));
 	}
+	
+
 }
