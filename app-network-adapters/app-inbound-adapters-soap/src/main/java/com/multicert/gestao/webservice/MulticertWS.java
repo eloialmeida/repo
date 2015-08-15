@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.multicert.gestao.GestaoLocal;
 import com.multicert.model.MulticertException;
 import com.multicert.multicert.ListarClientes;
+import com.multicert.multicert.ListarClientesComNomeResponse;
 import com.multicert.multicert.ListarClientesResponse;
 import com.multicert.multicert.Multicert;
 import com.multicert.multicertcommontypes.Cliente;
@@ -27,7 +28,7 @@ public class MulticertWS implements Multicert {
 
 	public Cliente guardarCliente(String nif, String nome, String morada, String telefone) {
 		try {
-		LOG.info("[IN] guardarCliente with name {}",nome);
+			LOG.info("[IN] guardarCliente with name {}",nome);
 			com.multicert.model.Cliente b = service.guardarCliente(nome, morada, nif, telefone);
 			LOG.info("[OUT] guardarCliente");
 			return MulticertWSMapper.map2SoapObject(b);
@@ -55,8 +56,22 @@ public class MulticertWS implements Multicert {
 	}
 
 
+	public Cliente listarClientesComNif(String nif) {
+		
+		try {
+			LOG.info("[IN] listarClientesComNif {}",nif);
+			com.multicert.model.Cliente c = service.listarCliente(nif);
+			LOG.info("[OUT] listarClientesComNif");
+			return MulticertWSMapper.map2SoapObject(c);
+		} catch (MulticertException e) {
+			throw new RuntimeException(e.getCause());
+		}
+	}
+
+
 	public List<Cliente> listarClientesComNome(String nome) {
-		ListarClientesResponse listarClientesResponse = new ListarClientesResponse();
+		
+		ListarClientesComNomeResponse listarClientesResponse = new ListarClientesComNomeResponse();
 
 		try {
 			for(com.multicert.model.Cliente c : service.listarClientesComNome(nome)){

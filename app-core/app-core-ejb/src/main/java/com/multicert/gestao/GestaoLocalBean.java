@@ -23,7 +23,7 @@ public class GestaoLocalBean implements GestaoLocal {
 
 
 	public Cliente guardarCliente(String nome, String morada, String nif, String telefone) {
-		Cliente cliente = new Cliente(nome,morada,UUID.randomUUID().toString());
+		Cliente cliente = new Cliente(nome,morada,UUID.randomUUID().toString(),telefone);
 		dao.create(cliente);	
 		return cliente;
 	}
