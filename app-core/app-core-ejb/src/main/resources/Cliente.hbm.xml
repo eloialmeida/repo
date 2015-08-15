@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping>
+    <class name="com.multicert.model.Cliente" table="clientes">
+        <id name="nif" type="string" column="NIF" >
+            <generator class="assigned"/>
+        </id>
+        <property name="morada">
+            <column name="MORADA" />
+        </property>
+        <property name="nome">
+            <column name="NOME"/>
+        </property>
+    </class>
+</hibernate-mapping> 

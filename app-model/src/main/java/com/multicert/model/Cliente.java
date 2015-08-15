@@ -1,8 +1,10 @@
 package com.multicert.model;
 
+import java.io.Serializable;
 
 
-public class Cliente {
+
+public class Cliente implements Serializable{
 	
 	private String nome;
 	

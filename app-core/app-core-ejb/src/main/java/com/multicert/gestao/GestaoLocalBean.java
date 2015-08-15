@@ -2,11 +2,16 @@ package com.multicert.gestao;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
-import javax.jws.WebMethod;
-import javax.jws.WebService;
+
+
+
+
+import org.hibernate.Session;
+
 
 import com.multicert.model.Cliente;
 
@@ -15,10 +20,15 @@ import com.multicert.model.Cliente;
 @Default
 @Stateless
 public class GestaoLocalBean implements GestaoLocal {
-
 	
 	public Cliente guardarCliente(String nome, String morada, String nif) {
-		return new Cliente("echo "+nome,"echo "+morada,"in echo "+nif);
+		
+		Session session = HibernateSessionManager.getSessionFactory().openSession();
+		Cliente cliente = new Cliente(nome,morada,UUID.randomUUID().toString());
+		session.beginTransaction();
+		session.save(cliente);
+		session.getTransaction().commit();
+		return cliente;
 	}
 
 	public List<Cliente> listarClientes() {
