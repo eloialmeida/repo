@@ -2,14 +2,18 @@ package com.multicert.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 
+@Entity
 public class Cliente implements Serializable{
 	
 	private String nome;
 	
 	private String morada;
 	
+	@Id
 	private String nif;
 	
 	
