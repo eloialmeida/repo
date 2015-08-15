@@ -39,6 +39,8 @@
 							type="xsd:string" />
 						<xsd:element minOccurs="0" maxOccurs="1" name="morada"
 							type="xsd:string" />
+						<xsd:element minOccurs="0" maxOccurs="1" name="telefone"
+							type="xsd:string" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -67,6 +69,22 @@
 				</xsd:complexType>
 			</xsd:element>
 			
+			
+			<!-- LISTAR CLIENTEs COM NOME -->
+			<xsd:element name="listarClientesComNome">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="1" maxOccurs="1" name="nome" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="listarClientesComNomeResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Cliente" maxOccurs="unbounded" type="mcb:Cliente" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
 		</xsd:schema>
 	</wsdl:types>
 	
@@ -100,6 +118,23 @@
 		</wsdl:operation>
 	</wsdl:portType>
 	
+	<wsdl:message name="listarClientesComNomeRequest">
+		<wsdl:part element="tns:listarClientesComNome" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="listarClientesComNomeResponse">
+		<wsdl:part element="tns:listarClientesComNomeResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:portType name="Multicert">
+		<wsdl:operation name="listarClientesComNome">
+			<wsdl:input message="tns:listarClientesComNomeRequest" />
+			<wsdl:output message="tns:listarClientesComNomeResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	
+	<!--::::::::::-->
+	<!--:BINDING::-->
+	<!--::::::::::-->
 	
 	<wsdl:binding name="MulticertSOAP"
 		type="tns:Multicert">
@@ -115,6 +150,8 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
+
+		
 	</wsdl:binding>
 	<wsdl:service name="Multicert">
 		<wsdl:port binding="tns:MulticertSOAP" name="MulticertSOAP">

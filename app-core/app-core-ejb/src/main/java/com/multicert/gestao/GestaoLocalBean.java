@@ -21,7 +21,8 @@ public class GestaoLocalBean implements GestaoLocal {
 	@EJB
 	private MulticertDao<Cliente> dao;
 
-	public Cliente guardarCliente(String nome, String morada, String nif) {
+
+	public Cliente guardarCliente(String nome, String morada, String nif, String telefone) {
 		Cliente cliente = new Cliente(nome,morada,UUID.randomUUID().toString());
 		dao.create(cliente);	
 		return cliente;

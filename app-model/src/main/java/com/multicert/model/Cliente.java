@@ -16,15 +16,45 @@ public class Cliente implements Serializable{
 	@Id
 	private String nif;
 	
+	private String telefone;
+	
 	
 	public Cliente(){}
 	
-	public Cliente(String nome,String morada,String nif){
+	public Cliente(String nome){
 		this.nome=nome;
+	}
+	
+	public Cliente(String nome,String morada){
+		this(nome);
 		this.morada=morada;
+	}
+	
+	
+	public Cliente(String nome,String morada,String nif){
+		this(nome,morada);
 		this.nif=nif;
 	}
 	
+	public Cliente(String nome,String morada,String nif,String telefone){
+		this(nome,morada,nif);
+		this.telefone=telefone;
+	}
+	
+	/**
+	 * @return the telefone
+	 */
+	public String getTelefone() {
+		return telefone;
+	}
+
+	/**
+	 * @param telefone the telefone to set
+	 */
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	/**
 	 * @return the nome
 	 */

@@ -1,6 +1,7 @@
 package com.multicert.gestao.webservice;
 
-import java.util.Arrays;
+
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.jws.WebService;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.multicert.gestao.GestaoLocal;
+import com.multicert.model.MulticertException;
 import com.multicert.multicert.ListarClientes;
 import com.multicert.multicert.ListarClientesResponse;
 import com.multicert.multicert.Multicert;
@@ -23,30 +25,48 @@ public class MulticertWS implements Multicert {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(MulticertWS.class);
 
-	public Cliente guardarCliente(String nif, String nome, String morada) {
+	public Cliente guardarCliente(String nif, String nome, String morada, String telefone) {
+		try {
 		LOG.info("[IN] guardarCliente with name {}",nome);
-		com.multicert.model.Cliente b = service.guardarCliente(nome, morada, nif);
-		LOG.info("[OUT] guardarCliente");
-		return MulticertWSMapper.map2SoapObject(b);
+			com.multicert.model.Cliente b = service.guardarCliente(nome, morada, nif, telefone);
+			LOG.info("[OUT] guardarCliente");
+			return MulticertWSMapper.map2SoapObject(b);
+		} catch (MulticertException e) {
+			throw new RuntimeException(e.getCause());
+		}
+
 	}
 
 
 	public ListarClientesResponse listarClientes(ListarClientes parameters) {
-//		LOG.info("[IN] listarClientes");
+
 		ListarClientesResponse listarClientesResponse = new ListarClientesResponse();
-//		for(com.multicert.model.Cliente c : service.listarClientes()){
-//			listarClientesResponse.getCliente().add(MulticertWSMapper.map2SoapObject(c));
-//		}
-//		LOG.info("[OUT] listarClientes");
-//		return listarClientesResponse;
-		
-		
-		for(com.multicert.model.Cliente c : service.listarClientesComNome("loi")){
-			listarClientesResponse.getCliente().add(MulticertWSMapper.map2SoapObject(c));
+
+		try {
+			for(com.multicert.model.Cliente c : service.listarClientes()){
+				listarClientesResponse.getCliente().add(MulticertWSMapper.map2SoapObject(c));
+			}
+		} catch (MulticertException e) {
+			throw new RuntimeException(e.getCause());
 		}
-		
 
 		LOG.info("[OUT] listarClientes");
 		return listarClientesResponse;
+	}
+
+
+	public List<Cliente> listarClientesComNome(String nome) {
+		ListarClientesResponse listarClientesResponse = new ListarClientesResponse();
+
+		try {
+			for(com.multicert.model.Cliente c : service.listarClientesComNome(nome)){
+				listarClientesResponse.getCliente().add(MulticertWSMapper.map2SoapObject(c));
+			}
+		} catch (MulticertException e) {
+			throw new RuntimeException(e.getCause());
+		}
+
+		LOG.info("[OUT] listarClientes");
+		return listarClientesResponse.getCliente();
 	}
 }
