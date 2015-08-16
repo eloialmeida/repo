@@ -2,7 +2,6 @@ package com.multicert.gestao;
 
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
