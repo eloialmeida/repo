@@ -11,10 +11,12 @@ import org.slf4j.LoggerFactory;
 
 import com.multicert.gestao.GestaoLocal;
 import com.multicert.model.MulticertException;
-import com.multicert.multicert.ListarClientesComNomeResponse;
-import com.multicert.multicert.ListarClientesResponse;
+import com.multicert.multicert.ApagarClientesPorNifResponse.ApagarClientesPorNifResponseContent;
+import com.multicert.multicert.GuardarClienteResponse.GuardarClienteResponseContent;
+import com.multicert.multicert.ListarClientesComNifResponse.ListarClientesComNifResponseContent;
+import com.multicert.multicert.ListarClientesComNomeResponse.ListarClientesComNomeResponseContent;
+import com.multicert.multicert.ListarClientesResponse.ListarClientesResponseContent;
 import com.multicert.multicert.Multicert;
-import com.multicert.multicertcommontypes.Cliente;
 import com.multicert.multicertcommontypes.VOID;
 
 
@@ -26,58 +28,45 @@ public class MulticertWS implements Multicert {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(MulticertWS.class);
 
-	public Cliente guardarCliente(String nif, String nome, String morada, String telefone) {
-		try {
-			LOG.info("[IN] guardarCliente with name {}",nome);
-			com.multicert.model.Cliente b = service.guardarCliente(nome, morada, nif, telefone);
-			LOG.info("[OUT] guardarCliente");
-			return MulticertWSMapper.map2SoapObject(b);
-		} catch (MulticertException e) {		
-			LOG.error(e.getMessage());
-			//throw new RuntimeException(e.getCause());
-			return new Cliente();
-		}
 
-	}
+	public ListarClientesResponseContent listarClientes(VOID parameters) {
 
-
-	public List<Cliente> listarClientes(VOID parameters) {
-
-		ListarClientesResponse listarClientesResponse = new ListarClientesResponse();
+		ListarClientesResponseContent responseContent = new ListarClientesResponseContent();
 
 		try {
 			for(com.multicert.model.Cliente c : service.listarClientes()){
-				listarClientesResponse.getCliente().add(MulticertWSMapper.map2SoapObject(c));
+				responseContent.getCliente().add(MulticertWSMapper.map2SoapObject(c));
 			}
 		} catch (MulticertException e) {
 			LOG.error(e.getMessage());
-			//throw new RuntimeException(e.getCause());
-			return new ListarClientesResponse().getCliente();
+			responseContent.setError(MulticertWSMapper.map2SoapObject(e));
 		}
 
 		LOG.info("[OUT] listarClientes");
-		return listarClientesResponse.getCliente();
+		return responseContent;
 	}
 
 
-	public Cliente listarClientesComNif(String nif) {
+	public ListarClientesComNifResponseContent listarClientesComNif(String nif) {
+		
+		ListarClientesComNifResponseContent responseContent = new ListarClientesComNifResponseContent();
 		
 		try {
 			LOG.info("[IN] listarClientesComNif {}",nif);
 			com.multicert.model.Cliente c = service.listarCliente(nif);
 			LOG.info("[OUT] listarClientesComNif");
-			return MulticertWSMapper.map2SoapObject(c);
+			responseContent.setCliente(MulticertWSMapper.map2SoapObject(c));
 		} catch (MulticertException e) {
 			LOG.error(e.getMessage());
-			//throw new RuntimeException(e.getCause());
-			return new Cliente();
+			responseContent.setError(MulticertWSMapper.map2SoapObject(e));
 		}
+		return responseContent;
 	}
 
 
-	public List<Cliente> listarClientesComNome(String nome) {
+	public ListarClientesComNomeResponseContent listarClientesComNome(String nome) {
 		
-		ListarClientesComNomeResponse listarClientesResponse = new ListarClientesComNomeResponse();
+		ListarClientesComNomeResponseContent listarClientesResponse = new ListarClientesComNomeResponseContent();
 
 		try {
 			for(com.multicert.model.Cliente c : service.listarClientesComNome(nome)){
@@ -85,26 +74,42 @@ public class MulticertWS implements Multicert {
 			}
 		} catch (MulticertException e) {
 			LOG.error(e.getMessage());
-			//throw new RuntimeException(e.getCause());
-			return new ListarClientesResponse().getCliente();
+			listarClientesResponse.setError(MulticertWSMapper.map2SoapObject(e));
 		}
 
 		LOG.info("[OUT] listarClientesComNome");
-		return listarClientesResponse.getCliente();
+		return listarClientesResponse;
 	}
 
 
-	public VOID apagarClientesPorNif(String nif) {
-		VOID _void_ = new VOID();
+	public ApagarClientesPorNifResponseContent apagarClientesPorNif(String nif) {
+		ApagarClientesPorNifResponseContent _void_ = new ApagarClientesPorNifResponseContent();
 		LOG.info("[IN] apagarClientesPorNif {}",nif);
 		try {
 			service.apagarClientePorNif(nif);
 		} catch (MulticertException e) {
 			LOG.error(e.getMessage());
-			//throw new RuntimeException(e.getCause());
-			return new VOID();
+			LOG.error(e.getMessage());
+			_void_.setError(MulticertWSMapper.map2SoapObject(e));
 		}
 		LOG.info("[OUT] apagarClientesPorNif");
 		return _void_;
+	}
+
+
+	public GuardarClienteResponseContent guardarCliente(String nif,
+			String nome, String morada, String telefone) {
+		
+		GuardarClienteResponseContent responseContent = new GuardarClienteResponseContent();
+		try {
+			LOG.info("[IN] guardarCliente with name {}", nome);
+			com.multicert.model.Cliente b = service.guardarCliente(nome,morada, nif, telefone);
+			LOG.info("[OUT] guardarCliente");
+			responseContent.setCliente(MulticertWSMapper.map2SoapObject(b));
+		} catch (MulticertException e) {
+			LOG.error(e.getMessage());
+			responseContent.setError(MulticertWSMapper.map2SoapObject(e));
+		}
+		return responseContent;
 	}
 }

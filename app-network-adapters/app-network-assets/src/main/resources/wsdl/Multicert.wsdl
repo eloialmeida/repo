@@ -26,6 +26,13 @@
 			    </xsd:sequence>
 			</xsd:complexType>
 			
+
+			<xsd:complexType name="Error">
+			    <xsd:sequence>
+			    	<xsd:element minOccurs="0" maxOccurs="1" name="cause" type="xsd:string" />
+			    </xsd:sequence>
+			</xsd:complexType>
+			
 		</xsd:schema>
 		<!-- END This is a copy from the common assets XSD END -->
 		<xsd:schema targetNamespace="http://www.multicert.com/Multicert/">
@@ -49,7 +56,14 @@
 			<xsd:element name="guardarClienteResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="Cliente" maxOccurs="1" type="mcb:Cliente" />
+						<xsd:element name="guardarClienteResponseContent">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Cliente" maxOccurs="1" type="mcb:Cliente" />
+									<xsd:element name="Error" minOccurs="0" maxOccurs="1" type="mcb:Error" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -65,7 +79,14 @@
 			<xsd:element name="listarClientesComNomeResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="Cliente" maxOccurs="unbounded" type="mcb:Cliente" />
+						<xsd:element name="listarClientesComNomeResponseContent">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Cliente" maxOccurs="unbounded" type="mcb:Cliente" />
+									<xsd:element name="Error" minOccurs="0" maxOccurs="1" type="mcb:Error" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -82,7 +103,14 @@
 			<xsd:element name="listarClientesResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="Cliente" maxOccurs="unbounded" type="mcb:Cliente" />
+						<xsd:element name="listarClientesResponseContent">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Cliente" maxOccurs="unbounded" type="mcb:Cliente" />
+									<xsd:element name="Error" minOccurs="0" maxOccurs="1" type="mcb:Error" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -99,7 +127,14 @@
 			<xsd:element name="listarClientesComNifResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="Cliente" maxOccurs="1" type="mcb:Cliente" />
+						<xsd:element name="listarClientesComNifResponseContent">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Cliente" maxOccurs="1" type="mcb:Cliente" />
+									<xsd:element name="Error" minOccurs="0" maxOccurs="1" type="mcb:Error" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -115,7 +150,14 @@
 			<xsd:element name="apagarClientesPorNifResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="void" maxOccurs="1" type="mcb:VOID" />
+						<xsd:element name="apagarClientesPorNifResponseContent">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="void" maxOccurs="1" type="mcb:VOID" />
+									<xsd:element name="Error" minOccurs="0" maxOccurs="1" type="mcb:Error" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>

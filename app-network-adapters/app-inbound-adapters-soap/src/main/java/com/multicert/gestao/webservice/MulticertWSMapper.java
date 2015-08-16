@@ -2,6 +2,7 @@ package com.multicert.gestao.webservice;
 
 import com.multicert.model.MulticertException;
 import com.multicert.multicertcommontypes.Cliente;
+import com.multicert.multicertcommontypes.Error;
 
 public class MulticertWSMapper {
 
@@ -25,5 +26,11 @@ public class MulticertWSMapper {
 		soapObject.setTelefone(c.getTelefone());
 		
 		return soapObject;
+	}
+
+	public static Error map2SoapObject(MulticertException e) {
+		Error error = new Error();
+		error.setCause(e.getMessage());
+		return error;
 	}
 }
