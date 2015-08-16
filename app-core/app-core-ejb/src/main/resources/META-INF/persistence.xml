@@ -4,7 +4,7 @@
              version="2.0">
    <persistence-unit name="punit" transaction-type="JTA">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
-      <jta-data-source>java:jboss/datasources/MSQLDS</jta-data-source>
+      <jta-data-source>java:jboss/datasources/MULTICERTDS</jta-data-source>
       <class>com.multicert.model.Cliente</class>
       <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
       <validation-mode>CALLBACK</validation-mode>

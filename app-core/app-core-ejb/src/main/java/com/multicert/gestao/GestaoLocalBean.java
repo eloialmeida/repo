@@ -7,6 +7,8 @@ import java.util.UUID;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.multicert.gestao.dao.MulticertDao;
 import com.multicert.model.Cliente;
@@ -21,14 +23,19 @@ public class GestaoLocalBean implements GestaoLocal {
 	@EJB
 	private MulticertDao<Cliente> dao;
 
+	private static final Logger LOG = LoggerFactory.getLogger(GestaoLocalBean.class);
 
 	public Cliente guardarCliente(String nome, String morada, String nif, String telefone) throws MulticertException {
-		
+
 		if(!validateCliente(nome, morada, nif, telefone))
-			throw new MulticertException("Cliente nao pode ter nenhum dado nulo");
+			throw new MulticertException("Cliente invalido");
 		
-		Cliente cliente = new Cliente(nome,morada,UUID.randomUUID().toString(),telefone);
-		dao.create(cliente);	
+		if(listarCliente(nif)!=null){
+			throw new MulticertException("Cliente já existente com o mesmo nif "+nif);
+		}
+	
+		Cliente cliente = new Cliente(nome,morada,nif,telefone);	
+		dao.create(cliente);
 		return cliente;
 	}
 

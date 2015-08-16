@@ -10,15 +10,15 @@ import com.multicert.model.MulticertException;
 @Local
 public interface MulticertDao<T extends Cliente> {
 
-	public abstract void create(T object) throws MulticertException;
+	public abstract void create(T object);
 
-	public abstract void update(T object) throws MulticertException;
+	public abstract void update(T object);
 
-	public abstract void delete(T object) throws MulticertException;
+	public abstract void delete(T object);
 	
-	public List<T> getAll() throws MulticertException;
+	public List<T> getAll();
 
-	public T read(String id) throws MulticertException;
+	public T read(String id);
 	
-	public List<T> getAllWithNameLike(String pattern) throws MulticertException;
+	public List<T> getAllWithNameLike(String pattern);
 }
