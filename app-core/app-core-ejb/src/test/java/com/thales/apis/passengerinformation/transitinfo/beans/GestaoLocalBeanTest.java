@@ -7,9 +7,6 @@ import javax.ejb.EJB;
 import javax.enterprise.inject.Produces;
 
 
-
-
-
 import org.jglue.cdiunit.AdditionalClasses;
 import org.jglue.cdiunit.CdiRunner;
 import org.jglue.cdiunit.ejb.SupportEjb;
