@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="b30f6257-b9f9-40ad-841e-e15134a197c9" activeEnvironment="Default" name="http://eloidns.cloudapp.net:8080/MULTICERT_WSDL/service.wsdl" resourceRoot="" soapui-version="5.2.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="c922afa7-654c-4335-9d38-87b6599aa60f" wsaVersion="NONE" name="MulticertWSServiceSoapBinding" type="wsdl" bindingName="{http://www.multicert.com/Multicert/}MulticertWSServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://eloidns.cloudapp.net:8080/MULTICERT_WSDL/service.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://eloidns.cloudapp.net:8080/MULTICERT_WSDL/service.wsdl"><con:part><con:url>http://eloidns.cloudapp.net:8080/MULTICERT_WSDL/service.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MulticertWSService" targetNamespace="http://www.multicert.com/Multicert/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.multicert.com/Multicert/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://www.multicert.com/MulticertCommonTypes" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="Cliente">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="nif" type="xs:string"/>
+          <xs:element minOccurs="0" name="nome" type="xs:string"/>
+          <xs:element minOccurs="0" name="morada" type="xs:string"/>
+          <xs:element minOccurs="0" name="telefone" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Error">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cause" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VOID">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://www.multicert.com/Multicert/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.multicert.com/MulticertCommonTypes">
+      <xs:import namespace="http://www.multicert.com/MulticertCommonTypes"/>
+      <xs:element name="apagarClientesPorNif">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="nif" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="apagarClientesPorNifResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="apagarClientesPorNifResponseContent">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="void" type="ns1:VOID"/>
+                  <xs:element minOccurs="0" name="Error" type="ns1:Error"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="guardarCliente">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="nif" type="xs:string"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="morada" type="xs:string"/>
+            <xs:element name="telefone" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="guardarClienteResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="guardarClienteResponseContent">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Cliente" type="ns1:Cliente"/>
+                  <xs:element minOccurs="0" name="Error" type="ns1:Error"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="listarClientes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="void" type="ns1:VOID"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="listarClientesComNif">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="nif" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="listarClientesComNifResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="listarClientesComNifResponseContent">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Cliente" type="ns1:Cliente"/>
+                  <xs:element minOccurs="0" name="Error" type="ns1:Error"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="listarClientesComNome">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="nome" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="listarClientesComNomeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="listarClientesComNomeResponseContent">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="Cliente" type="ns1:Cliente"/>
+                  <xs:element minOccurs="0" name="Error" type="ns1:Error"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="listarClientesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="listarClientesResponseContent">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="Cliente" type="ns1:Cliente"/>
+                  <xs:element minOccurs="0" name="Error" type="ns1:Error"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="guardarClienteResponse">
+    <wsdl:part element="tns:guardarClienteResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="listarClientes">
+    <wsdl:part element="tns:listarClientes" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="listarClientesComNome">
+    <wsdl:part element="tns:listarClientesComNome" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="listarClientesComNif">
+    <wsdl:part element="tns:listarClientesComNif" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="apagarClientesPorNifResponse">
+    <wsdl:part element="tns:apagarClientesPorNifResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="listarClientesComNifResponse">
+    <wsdl:part element="tns:listarClientesComNifResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="guardarCliente">
+    <wsdl:part element="tns:guardarCliente" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="listarClientesResponse">
+    <wsdl:part element="tns:listarClientesResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="apagarClientesPorNif">
+    <wsdl:part element="tns:apagarClientesPorNif" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="listarClientesComNomeResponse">
+    <wsdl:part element="tns:listarClientesComNomeResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="Multicert">
+    <wsdl:operation name="guardarCliente">
+      <wsdl:input message="tns:guardarCliente" name="guardarCliente"/>
+      <wsdl:output message="tns:guardarClienteResponse" name="guardarClienteResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="listarClientes">
+      <wsdl:input message="tns:listarClientes" name="listarClientes"/>
+      <wsdl:output message="tns:listarClientesResponse" name="listarClientesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="apagarClientesPorNif">
+      <wsdl:input message="tns:apagarClientesPorNif" name="apagarClientesPorNif"/>
+      <wsdl:output message="tns:apagarClientesPorNifResponse" name="apagarClientesPorNifResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="listarClientesComNome">
+      <wsdl:input message="tns:listarClientesComNome" name="listarClientesComNome"/>
+      <wsdl:output message="tns:listarClientesComNomeResponse" name="listarClientesComNomeResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="listarClientesComNif">
+      <wsdl:input message="tns:listarClientesComNif" name="listarClientesComNif"/>
+      <wsdl:output message="tns:listarClientesComNifResponse" name="listarClientesComNifResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MulticertWSServiceSoapBinding" type="tns:Multicert">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="guardarCliente">
+      <soap:operation soapAction="http://www.multicert.com/Multicert/guardarCliente" style="document"/>
+      <wsdl:input name="guardarCliente">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="guardarClienteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarClientes">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarClientes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarClientesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="apagarClientesPorNif">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="apagarClientesPorNif">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="apagarClientesPorNifResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarClientesComNome">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarClientesComNome">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarClientesComNomeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarClientesComNif">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarClientesComNif">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarClientesComNifResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MulticertWSService">
+    <wsdl:port binding="tns:MulticertWSServiceSoapBinding" name="MulticertPort">
+      <soap:address location="http://23.97.220.130:8080/app-inbound-adapters-soap/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://23.97.220.130:8080/app-inbound-adapters-soap/</con:endpoint></con:endpoints><con:operation id="3768b73a-c849-4ecc-a2e4-1bbcc65ce6a6" isOneWay="false" action="" name="apagarClientesPorNif" bindingOperationName="apagarClientesPorNif" type="Request-Response" outputName="apagarClientesPorNifResponse" inputName="apagarClientesPorNif" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5b568c28-f889-4f23-984b-34b8cda1b3b3" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://23.97.220.130:8080/app-inbound-adapters-soap/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mul="http://www.multicert.com/Multicert/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mul:apagarClientesPorNif>\r
+         <nif>?</nif>\r
+      </mul:apagarClientesPorNif>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.multicert.com/Multicert/Multicert/apagarClientesPorNif"/></con:call></con:operation><con:operation id="5a862d16-80ea-412a-bcf0-24221d5f32f3" isOneWay="false" action="http://www.multicert.com/Multicert/guardarCliente" name="guardarCliente" bindingOperationName="guardarCliente" type="Request-Response" outputName="guardarClienteResponse" inputName="guardarCliente" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3f89a22a-4944-41b1-a481-50986283344a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://23.97.220.130:8080/app-inbound-adapters-soap/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mul="http://www.multicert.com/Multicert/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mul:guardarCliente>\r
+         <nif>?</nif>\r
+         <nome>?</nome>\r
+         <morada>?</morada>\r
+         <telefone>?</telefone>\r
+      </mul:guardarCliente>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.multicert.com/Multicert/guardarCliente"/></con:call></con:operation><con:operation id="bd8783c6-84aa-4f5b-88f7-8ad036c7108c" isOneWay="false" action="" name="listarClientes" bindingOperationName="listarClientes" type="Request-Response" outputName="listarClientesResponse" inputName="listarClientes" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="60de002f-df37-4ef1-b2ae-37f23d95a6ae" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://23.97.220.130:8080/app-inbound-adapters-soap/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mul="http://www.multicert.com/Multicert/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mul:listarClientes>\r
+         <void/>\r
+      </mul:listarClientes>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.multicert.com/Multicert/Multicert/listarClientes"/></con:call></con:operation><con:operation id="c5614de8-0b8a-4916-a742-6521241829be" isOneWay="false" action="" name="listarClientesComNif" bindingOperationName="listarClientesComNif" type="Request-Response" outputName="listarClientesComNifResponse" inputName="listarClientesComNif" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f6ec8611-e6d2-4661-aa17-8e4542c334aa" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://23.97.220.130:8080/app-inbound-adapters-soap/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mul="http://www.multicert.com/Multicert/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mul:listarClientesComNif>\r
+         <nif>?</nif>\r
+      </mul:listarClientesComNif>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.multicert.com/Multicert/Multicert/listarClientesComNif"/></con:call></con:operation><con:operation id="54810816-6d4f-452a-ae73-9b4bfd6fe4a8" isOneWay="false" action="" name="listarClientesComNome" bindingOperationName="listarClientesComNome" type="Request-Response" outputName="listarClientesComNomeResponse" inputName="listarClientesComNome" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3796032a-eda9-4e17-9ea1-7d77be819607" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://23.97.220.130:8080/app-inbound-adapters-soap/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mul="http://www.multicert.com/Multicert/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mul:listarClientesComNome>\r
+         <nome>?</nome>\r
+      </mul:listarClientesComNome>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.multicert.com/Multicert/Multicert/listarClientesComNome"/></con:call></con:operation></con:interface><con:testSuite id="0bb546d8-0931-416b-afe8-dcc115e0c72e" name="MulticertWSServiceSoapBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="46278d18-1555-4290-b901-629eb939257c" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="listarClientes TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="b32efbdb-b141-4a52-bcf0-a426ca581e27" name="listarClientes"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MulticertWSServiceSoapBinding</con:interface><con:operation>listarClientes</con:operation><con:request name="listarClientes" id="1936017e-6df4-4c29-babb-71a964d0e48e"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://23.97.220.130:8080/app-inbound-adapters-soap/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mul="http://www.multicert.com/Multicert/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mul:listarClientes>\r
+         <void/>\r
+      </mul:listarClientes>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.multicert.com/Multicert/Multicert/listarClientes" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest id="8f5fd56f-debd-47e6-8537-b26cc2ed958d" name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:loadTest id="7c557793-a11a-4744-a9a7-8553f7f6d473" name="LoadTest 2"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase id="69dd0e34-f9f2-4a97-a7b3-103684202667" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="listarClientesComNome TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="0b4946a0-6776-45df-844e-3b30e83f1001" name="listarClientesComNome"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MulticertWSServiceSoapBinding</con:interface><con:operation>listarClientesComNome</con:operation><con:request name="listarClientesComNome" id="63982ac2-a59d-4e73-8090-8878ff406c52"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://23.97.220.130:8080/app-inbound-adapters-soap/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mul="http://www.multicert.com/Multicert/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mul:listarClientesComNome>\r
+         <nome>?</nome>\r
+      </mul:listarClientesComNome>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://www.multicert.com/Multicert/Multicert/listarClientesComNome"/></con:request></con:config></con:testStep><con:loadTest id="d5a4a81f-29c2-4e2f-8542-26c58ff407d3" name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
