@@ -30,7 +30,7 @@ import com.multicert.multicertcommontypes.Cliente;
  */
 public class PopulateDB {
 	
-	private static final int COUNT = 1000;
+	private static final int COUNT = 500;
 	
 	private static final String TEST_TAG = "!#!#!#!#!#!#";
 	private static final String URI = "http://www.multicert.com/Multicert/";
