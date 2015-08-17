@@ -32,7 +32,7 @@ public class FunctionalIT {
 	
 	private static final String TEST_TAG = "23$%$%&/()=*-";
 	private static final String URI = "http://www.multicert.com/Multicert/";
-	private static final String URL_ = "http://localhost:8080/app-inbound-adapters-soap/";
+	private static final String URL_ = "http://23.97.220.130:8080/MULTICERT_WSDL/service.wsdl";
 	private static final String SERVICE = "MulticertWSService";
 	private static final QName QNAME = new QName(URI, SERVICE);
 	private Multicert multicertWs;
@@ -41,7 +41,7 @@ public class FunctionalIT {
 	
 	@Before
 	public void setup() throws Exception{
-		service = Service.create(new java.net.URL(URL_+"?wsdl"), QNAME);
+		service = Service.create(new java.net.URL(URL_), QNAME);
 		multicertWs = service.getPort(Multicert.class);
 		
 		apagarTudo();
@@ -54,7 +54,7 @@ public class FunctionalIT {
 	
 	
 	/**
-	 * 
+	 * Teste 1
 	 *  - Adicionar Cliente A
 	 *  - Listar Cliente A, verificar que foi retornado
 	 *  - Apagar Cliente A
@@ -92,6 +92,7 @@ public class FunctionalIT {
 	
 	
 	/**
+	 * Teste 2
 	 *  - Adicionar Cliente A
 	 *  - Adicionar Cliente B, com o mesmo nif
 	 *  - Verificar mensagem de erro
@@ -122,6 +123,7 @@ public class FunctionalIT {
     }
 	
 	/**
+	 * Teste 3
 	 *  - Adicionar Cliente A
 	 *  - Apagar Cliente A
 	 *  - Apagar Novamente Cliente A
@@ -151,6 +153,7 @@ public class FunctionalIT {
 	
 
 	/**
+	 * Teste 4
 	 *  - Adicionar Cliente A
 	 *  - Adicionar Cliente B (nome de B é parcialmente comum a A)
 	 *  - Adicionar Cliente C

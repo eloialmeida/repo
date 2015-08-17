@@ -30,19 +30,19 @@ import com.multicert.multicertcommontypes.Cliente;
  */
 public class PopulateDB {
 	
-	private static final int COUNT = 500;
+	private static final int COUNT = 10;
 	
 	private static final String TEST_TAG = "!#!#!#!#!#!#";
 	private static final String URI = "http://www.multicert.com/Multicert/";
 	private static final String URL_ = "http://23.97.220.130:8080/MULTICERT_WSDL/service.wsdl";
 	private static final String SERVICE = "MulticertWSService";
 	private static final QName QNAME = new QName(URI, SERVICE);
-	private Multicert multicertWs;
+	private static Multicert multicertWs;
 	
-	Service service;
+	static Service service;
 	
-	@Before
-	public void setup() throws Exception{
+	//@Before
+	public static void setup() throws Exception{
 		service = Service.create(new java.net.URL(URL_), QNAME);
 		multicertWs = service.getPort(Multicert.class);
 		
@@ -52,16 +52,20 @@ public class PopulateDB {
 				System.out.println(i);
 			}
 		}
+		System.out.println("done");
 	}
 
 	
 	
-	@Test
+	//@Test
 	public void test1() throws Exception {
 		
 		Assert.assertNotNull(new Object());
     }
 
+	public static void main(String ...args) throws Exception{
+		setup();
+	}
 }
 
 
