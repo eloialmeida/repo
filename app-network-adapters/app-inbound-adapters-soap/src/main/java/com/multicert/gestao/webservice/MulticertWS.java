@@ -89,7 +89,6 @@ public class MulticertWS implements Multicert {
 			service.apagarClientePorNif(nif);
 		} catch (MulticertException e) {
 			LOG.error(e.getMessage());
-			LOG.error(e.getMessage());
 			_void_.setError(MulticertWSMapper.map2SoapObject(e));
 		}
 		LOG.info("[OUT] apagarClientesPorNif");

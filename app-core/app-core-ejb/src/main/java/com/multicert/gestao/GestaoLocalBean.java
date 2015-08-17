@@ -29,7 +29,7 @@ public class GestaoLocalBean implements GestaoLocal {
 		if(!validateCliente(nome, morada, nif, telefone))
 			throw new MulticertException("Cliente invalido");
 		
-		if(listarCliente(nif)!=null){
+		if(dao.read(nif)!=null){
 			throw new MulticertException("Cliente já existente com o mesmo nif "+nif);
 		}
 	
@@ -43,7 +43,11 @@ public class GestaoLocalBean implements GestaoLocal {
 	}
 
 	public Cliente listarCliente(String nif) throws MulticertException {	
-		return dao.read(nif);
+		Cliente cliente =  dao.read(nif);
+		if(cliente==null){
+			throw new MulticertException("Cliente Não Encontrado");
+		}
+		return cliente;
 	}
 	
 	public List<Cliente> listarClientesComNome(String ptrn) throws MulticertException {	
@@ -55,7 +59,7 @@ public class GestaoLocalBean implements GestaoLocal {
 	}
 
 	public void apagarClientePorNif(String nif) throws MulticertException {
-		Cliente c = listarCliente(nif);
+		Cliente c = dao.read(nif);
 		if(c==null)
 			throw new MulticertException("Cliente Inexistente");
 		dao.delete(c);

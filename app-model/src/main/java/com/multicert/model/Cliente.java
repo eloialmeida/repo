@@ -5,10 +5,13 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 
 @Entity
+@Table(name = "cliente", indexes = {@Index(name = "nif_ondex",  columnList="nif", unique = true)})
 public class Cliente implements Serializable{
 	
 	private String nome;
@@ -16,7 +19,7 @@ public class Cliente implements Serializable{
 	private String morada;
 	
 	@Id
-	@Column(unique=true)
+	@Column(unique=true,name = "nif")
 	private String nif;
 	
 	private String telefone;

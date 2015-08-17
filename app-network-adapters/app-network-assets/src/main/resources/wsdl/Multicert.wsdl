@@ -251,12 +251,10 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-
-		
 	</wsdl:binding>
 	<wsdl:service name="Multicert">
 		<wsdl:port binding="tns:MulticertSOAP" name="MulticertSOAP">
-			<soap:address location="http://www.multicert.com/" />
+			<soap:address location="http://23.97.220.130:8080/app-inbound-adapters-soap/" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

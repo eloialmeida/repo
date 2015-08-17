@@ -8,7 +8,12 @@ public class MulticertWSMapper {
 
 	public static Cliente map2SoapObject(com.multicert.model.Cliente c) throws MulticertException {
 		
+		if(c==null){
+			return null;
+		}
+		
 		Cliente soapObject = new Cliente();
+		
 		if(c.getNif()==null)
 			throw new MulticertException("NIF(ID) não pode ser null");
 		soapObject.setNif(c.getNif());

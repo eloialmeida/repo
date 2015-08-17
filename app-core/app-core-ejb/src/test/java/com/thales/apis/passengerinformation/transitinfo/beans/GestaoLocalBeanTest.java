@@ -114,12 +114,17 @@ public class GestaoLocalBeanTest {
 	@Test
 	public void testCreateDeleteReadSameObject() throws MulticertException{
 		
+		try{
+			bean.guardarCliente("asd", "ads", "NIF", "asd");
 	
-		bean.guardarCliente("asd", "ads", "NIF", "asd");
-
-		bean.apagarClientePorNif("NIF");
+			bean.apagarClientePorNif("NIF");
+			
+			Assert.assertNull(bean.listarCliente("NIF"));
 		
-		Assert.assertNull(bean.listarCliente("NIF"));
+		} catch (MulticertException e) {
+			Assert.assertTrue(true);
+			Assert.assertEquals("Cliente Não Encontrado", e.getMessage());
+		};
 	}
 	
 	@Test
